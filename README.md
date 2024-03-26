@@ -47,3 +47,5 @@ auditor.audit("hello world")\
 # Errors
 auditor.audit("hello looooooooooooooong password123")
 ```
+
+Or run `python python-examples/auditor_example.py`
