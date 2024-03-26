@@ -1,1 +1,2 @@
 disallowed_strings = ["password123", "123456789", "qwerty"]
+max_token_length = 10

@@ -1,18 +1,12 @@
-use clap::Parser;
-
-use auditor_lib::args::Args;
 use auditor_lib::auditor::Auditor;
 use auditor_lib::config::Config;
 
 fn main() {
-    // Parse command line args
-    let args: Args = Args::parse();
-
-    // Parse config file
-    let config = Config::from_file("config.toml");
+    // Parse the config
+    let config = Config::load_all("config.toml");
 
     // Construct an auditor
-    let auditor = Auditor::new(config.disallowed_strings, args.max_token_length);
+    let auditor = Auditor::new(config.disallowed_strings, config.max_token_length);
 
     // Read text from stdin
     let mut buffer = String::new();
