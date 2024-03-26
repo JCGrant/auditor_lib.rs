@@ -21,7 +21,7 @@ impl Auditor {
     }
 
     pub fn audit(&self, text: &str) -> Result<(), AuditError> {
-        // let mut errors: Vec<AuditTokenError> = Vec::new();
+        // Collect errors for each token in parallel
         let errors = text
             .par_split_whitespace()
             .flat_map(|token| self.audit_token(token))
@@ -34,16 +34,20 @@ impl Auditor {
 
     fn audit_token(&self, token: &str) -> Vec<AuditTokenError> {
         let mut token_errors: Vec<AuditTokenError> = Vec::new();
+        // Check token max length
         if token.len() > self.max_token_length {
             token_errors.push(AuditTokenError::TooLong {
                 token: token.to_string(),
             });
         }
+        // Check whether token is allowed
         if self.disallowed_strings.contains(&token.to_string()) {
             token_errors.push(AuditTokenError::Disallowed {
                 token: token.to_string(),
             });
         }
+        // More checks below...
+
         token_errors
     }
 }

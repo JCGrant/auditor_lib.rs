@@ -20,7 +20,7 @@ fn main() {
         .read_line(&mut buffer)
         .expect("Failed to read from stdin");
 
-    // Read text from stdin
+    // Audit text from stdin
     auditor
         .audit(&buffer)
         .expect("Failed to audit from text from stdin");
